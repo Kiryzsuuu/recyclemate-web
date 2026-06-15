@@ -10,6 +10,7 @@ interface UserData {
   email: string
   role: string
   avatarUrl?: string
+  isAdmin?: boolean
 }
 
 export default function Navbar() {
@@ -44,6 +45,7 @@ export default function Navbar() {
   }
 
   const isSellerRole = user && ['penumpul', 'pengepul', 'pengrajin', 'distributor', 'admin'].includes(user.role)
+  const isAdmin = user && (user.isAdmin || user.role === 'admin')
   const initials = user ? user.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) : ''
 
   return (
@@ -126,7 +128,7 @@ export default function Navbar() {
                       </>
                     )}
 
-                    {user.role === 'pembeli' && (
+                    {!isSellerRole && user.role === 'pembeli' && (
                       <Link
                         href="/store/open"
                         onClick={() => setDropdownOpen(false)}
@@ -137,15 +139,25 @@ export default function Navbar() {
                       </Link>
                     )}
 
-                    {user.role === 'admin' && (
-                      <Link
-                        href="/admin"
-                        onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-3 px-4 py-2.5 text-sm text-orange-600 hover:bg-orange-50 transition-colors"
-                      >
-                        <LayoutDashboard className="w-4 h-4" />
-                        Admin Dashboard
-                      </Link>
+                    {isAdmin && (
+                      <>
+                        <Link
+                          href="/admin"
+                          onClick={() => setDropdownOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-orange-600 hover:bg-orange-50 transition-colors"
+                        >
+                          <LayoutDashboard className="w-4 h-4" />
+                          Admin Dashboard
+                        </Link>
+                        <Link
+                          href="/admin/settings"
+                          onClick={() => setDropdownOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-orange-600 hover:bg-orange-50 transition-colors"
+                        >
+                          <Settings className="w-4 h-4" />
+                          Pengaturan Situs
+                        </Link>
+                      </>
                     )}
                   </div>
 
@@ -218,10 +230,15 @@ export default function Navbar() {
                   <Store className="w-4 h-4 text-gray-400" /> Buka Toko
                 </Link>
               )}
-              {user.role === 'admin' && (
-                <Link href="/admin" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-2 py-2.5 text-sm font-medium text-orange-600 rounded-xl hover:bg-orange-50">
-                  <LayoutDashboard className="w-4 h-4" /> Admin Dashboard
-                </Link>
+              {isAdmin && (
+                <>
+                  <Link href="/admin" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-2 py-2.5 text-sm font-medium text-orange-600 rounded-xl hover:bg-orange-50">
+                    <LayoutDashboard className="w-4 h-4" /> Admin Dashboard
+                  </Link>
+                  <Link href="/admin/settings" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-2 py-2.5 text-sm font-medium text-orange-600 rounded-xl hover:bg-orange-50">
+                    <Settings className="w-4 h-4" /> Pengaturan Situs
+                  </Link>
+                </>
               )}
               <div className="border-t border-gray-100 mt-2 pt-2">
                 <button onClick={logout} className="w-full flex items-center gap-3 px-2 py-2.5 text-sm font-medium text-red-500 rounded-xl hover:bg-red-50">

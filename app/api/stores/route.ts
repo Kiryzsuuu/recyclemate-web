@@ -49,8 +49,9 @@ export async function POST(req: NextRequest) {
       ownerEmail: user.email,
     })
 
-    const updatedUser = await User.findByIdAndUpdate(user.id, { role: storeType, storeId: store._id.toString() }, { new: true })
-    const newToken = signToken({ id: user.id, name: user.name, email: user.email, role: storeType })
+    const newRole = user.role === 'admin' ? 'admin' : storeType
+    const updatedUser = await User.findByIdAndUpdate(user.id, { role: newRole, storeId: store._id.toString() }, { new: true })
+    const newToken = signToken({ id: user.id, name: user.name, email: user.email, role: newRole })
 
     const res = NextResponse.json({ store, user: updatedUser })
     res.cookies.set('token', newToken, { httpOnly: true, maxAge: 60 * 60 * 24 * 7, path: '/' })

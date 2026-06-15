@@ -20,6 +20,7 @@ export async function POST() {
       email: adminEmail.toLowerCase(),
       password: hashed,
       role: 'admin',
+      isAdmin: true,
       city: 'Jakarta',
       phone: '',
     })
