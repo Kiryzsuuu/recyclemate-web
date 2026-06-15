@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Recycle, Leaf, ShoppingBag, Users, Award, ArrowRight, Trash2, Factory, Palette, BaggageClaim } from 'lucide-react'
+import { Recycle, Leaf, ShoppingBag, Users, Award, Trash2, Factory, Palette, BaggageClaim } from 'lucide-react'
 
 export default function LandingPage() {
   return (
@@ -45,7 +45,6 @@ export default function LandingPage() {
               </Link>
               <Link href="/register" className="inline-flex items-center gap-2 bg-transparent border-2 border-white text-white font-semibold px-6 py-3 rounded-xl hover:bg-white/10 transition-colors">
                 Daftar Sekarang
-                <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
           </div>

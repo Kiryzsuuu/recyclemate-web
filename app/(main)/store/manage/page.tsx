@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Plus, Pencil, Trash2, ArrowLeft } from 'lucide-react'
+import { Plus, Pencil, Trash2, ChevronLeft } from 'lucide-react'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
 import Modal from '@/components/Modal'
@@ -115,7 +115,7 @@ export default function ManageStorePage() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <button onClick={() => router.back()} className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-primary-800 mb-1">
-              <ArrowLeft className="w-4 h-4" /> Kembali
+              <ChevronLeft className="w-4 h-4" /> Kembali
             </button>
             <h1 className="text-2xl font-bold text-gray-900">Kelola Produk</h1>
           </div>
