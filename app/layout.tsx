@@ -9,7 +9,7 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: 'RecycleMate — Marketplace Produk Daur Ulang',
+  title: 'RecycleMate | Marketplace Produk Daur Ulang',
   description: 'Jual beli produk daur ulang, limbah, bahan baku, dan kerajinan tangan ramah lingkungan.',
 }
 

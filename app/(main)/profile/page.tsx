@@ -127,7 +127,7 @@ export default function ProfilePage() {
     )
   }
 
-  const isSellerRole = ['penumpul', 'pengepul', 'pengrajin', 'distributor'].includes(user.role)
+  const isSellerRole = ['penumpul', 'pengepul', 'pengrajin', 'distributor', 'admin'].includes(user.role)
 
   return (
     <div>
@@ -156,9 +156,14 @@ export default function ProfilePage() {
               </Button>
             )}
             {isSellerRole && (
-              <Button size="sm" onClick={() => router.push('/store/manage')} className="bg-white text-primary-800 hover:bg-green-50">
-                <Store className="w-3.5 h-3.5 mr-1" /> Kelola Produk
-              </Button>
+              <>
+                <Button size="sm" onClick={() => router.push('/store/manage')} className="bg-white text-primary-800 hover:bg-green-50">
+                  <Store className="w-3.5 h-3.5 mr-1" /> Kelola Produk
+                </Button>
+                <Button size="sm" onClick={() => router.push('/store/edit')} className="bg-white/20 text-white hover:bg-white/30">
+                  <Settings className="w-3.5 h-3.5 mr-1" /> Edit Toko
+                </Button>
+              </>
             )}
             <Button size="sm" onClick={() => setDonateModal(true)} className="bg-white/20 text-white hover:bg-white/30">
               <Heart className="w-3.5 h-3.5 mr-1" /> Donasi Limbah
