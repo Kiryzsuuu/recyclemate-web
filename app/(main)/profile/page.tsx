@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { User, ShoppingBag, Heart, Store, Settings } from 'lucide-react'
-import Navbar from '@/components/Navbar'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
 
@@ -61,7 +60,7 @@ export default function ProfilePage() {
   const [editBio, setEditBio] = useState('')
   const [saving, setSaving] = useState(false)
   const [donateModal, setDonateModal] = useState(false)
-  const [donateForm, setDonateForm] = useState({ itemName: '', description: '', material: '', quantity: 1 })
+  const [donateForm, setDonateForm] = useState({ itemName: '', description: '', material: '', quantity: 1, imageUrl: '', imagePreview: '' })
   const [donating, setDonating] = useState(false)
 
   useEffect(() => {
@@ -92,15 +91,28 @@ export default function ProfilePage() {
     setSaving(false)
   }
 
+  const handleDonateImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onloadend = () => {
+      const base64 = reader.result as string
+      setDonateForm(f => ({ ...f, imageUrl: base64, imagePreview: base64 }))
+    }
+    reader.readAsDataURL(file)
+  }
+
   const submitDonation = async () => {
     setDonating(true)
     try {
+      const { imagePreview: _, ...payload } = donateForm
       await fetch('/api/donations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(donateForm),
+        body: JSON.stringify(payload),
       })
       setDonateModal(false)
+      setDonateForm({ itemName: '', description: '', material: '', quantity: 1, imageUrl: '', imagePreview: '' })
       fetch('/api/donations').then(r => r.json()).then(d => setDonations(d.donations || []))
     } finally {
       setDonating(false)
@@ -109,11 +121,8 @@ export default function ProfilePage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <Navbar />
-        <div className="max-w-2xl mx-auto px-4 py-8">
-          <div className="bg-white rounded-2xl h-64 animate-pulse border border-gray-100" />
-        </div>
+      <div className="max-w-2xl mx-auto px-4 py-8">
+        <div className="bg-white rounded-2xl h-64 animate-pulse border border-gray-100" />
       </div>
     )
   }
@@ -121,8 +130,7 @@ export default function ProfilePage() {
   const isSellerRole = ['penumpul', 'pengepul', 'pengrajin', 'distributor'].includes(user.role)
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
+    <div>
       <div className="max-w-2xl mx-auto px-4 py-6">
         {/* Header */}
         <div className="bg-gradient-to-r from-primary-800 to-primary-600 rounded-2xl p-6 text-white mb-6">
@@ -264,6 +272,19 @@ export default function ProfilePage() {
                   className="w-full px-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-800"
                   placeholder="Kondisi, ukuran, dll"
                 />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-gray-700 block mb-1.5">Foto Limbah (opsional)</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleDonateImage}
+                  className="w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-medium file:bg-primary-50 file:text-primary-800 hover:file:bg-primary-100 cursor-pointer"
+                />
+                {donateForm.imagePreview && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={donateForm.imagePreview} alt="Preview" className="mt-2 w-full h-32 object-cover rounded-xl border border-gray-200" />
+                )}
               </div>
               <div className="flex gap-3 mt-2">
                 <Button variant="secondary" onClick={() => setDonateModal(false)} className="flex-1">Batal</Button>

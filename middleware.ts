@@ -5,10 +5,7 @@ export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
   const token = req.cookies.get('token')?.value
 
-  const isProtected = pathname.startsWith('/dashboard') || pathname.startsWith('/admin')
   const isAdmin = pathname.startsWith('/admin')
-
-  if (!isProtected) return NextResponse.next()
 
   if (!token) {
     return NextResponse.redirect(new URL('/login', req.url))
@@ -27,5 +24,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/admin/:path*'],
+  matcher: ['/home/:path*', '/profile/:path*', '/store/:path*', '/products/:path*', '/admin/:path*'],
 }

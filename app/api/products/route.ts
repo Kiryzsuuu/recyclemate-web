@@ -48,8 +48,22 @@ export async function POST(req: NextRequest) {
     await connectDB()
     const body = await req.json()
 
+    const { name, price, productType, material, description, stock, imageUrl, crafterCity } = body
+    if (!name || !price || !productType) {
+      return NextResponse.json({ error: 'name, price, dan productType wajib diisi' }, { status: 400 })
+    }
+    const validTypes = ['waste', 'material', 'handcraft', 'retail']
+    if (!validTypes.includes(productType)) {
+      return NextResponse.json({ error: 'productType tidak valid' }, { status: 400 })
+    }
+
     const product = await Product.create({
-      ...body,
+      name, price, productType,
+      material: material || '',
+      description: description || '',
+      stock: stock || 0,
+      imageUrl: imageUrl || '',
+      crafterCity: crafterCity || '',
       crafterId: user.id,
       crafterName: user.name,
       sellerRole: user.role,

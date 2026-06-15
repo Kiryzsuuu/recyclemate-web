@@ -6,12 +6,17 @@ import { getUser } from '@/lib/auth'
 import { signToken } from '@/lib/auth'
 
 export async function GET(req: NextRequest) {
-  const user = getUser(req)
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  try {
+    const user = getUser(req)
+    if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  await connectDB()
-  const store = await Store.findOne({ ownerId: user.id })
-  return NextResponse.json({ store })
+    await connectDB()
+    const store = await Store.findOne({ ownerId: user.id })
+    return NextResponse.json({ store })
+  } catch (err) {
+    console.error(err)
+    return NextResponse.json({ error: 'Server error' }, { status: 500 })
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -24,10 +29,22 @@ export async function POST(req: NextRequest) {
     if (existing) return NextResponse.json({ error: 'Kamu sudah punya toko' }, { status: 409 })
 
     const body = await req.json()
-    const { storeType } = body
+    const { storeType, storeName, description, city, phone } = body
+
+    const validTypes = ['penumpul', 'pengepul', 'pengrajin', 'distributor']
+    if (!storeType || !validTypes.includes(storeType)) {
+      return NextResponse.json({ error: 'storeType tidak valid' }, { status: 400 })
+    }
+    if (!storeName) {
+      return NextResponse.json({ error: 'storeName wajib diisi' }, { status: 400 })
+    }
 
     const store = await Store.create({
-      ...body,
+      storeType,
+      storeName,
+      description: description || '',
+      city: city || '',
+      phone: phone || '',
       ownerId: user.id,
       ownerName: user.name,
       ownerEmail: user.email,

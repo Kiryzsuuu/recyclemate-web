@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { ArrowLeft, Star, MapPin, Package, Minus, Plus } from 'lucide-react'
-import Navbar from '@/components/Navbar'
 import Button from '@/components/Button'
 import Modal from '@/components/Modal'
 import Input from '@/components/Input'
@@ -79,30 +78,21 @@ export default function ProductDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <Navbar />
-        <div className="max-w-3xl mx-auto px-4 py-8">
-          <div className="bg-white rounded-2xl h-96 animate-pulse" />
-        </div>
+      <div className="max-w-3xl mx-auto px-4 py-8">
+        <div className="bg-white rounded-2xl h-96 animate-pulse" />
       </div>
     )
   }
 
   if (!product) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Navbar />
-        <div className="text-center py-20 text-gray-500">Produk tidak ditemukan</div>
-      </div>
-    )
+    return <div className="text-center py-20 text-gray-500">Produk tidak ditemukan</div>
   }
 
   const matKey = product.material?.toLowerCase()
   const bgColor = MATERIAL_COLORS[matKey] || 'bg-green-100'
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
+    <div>
       <div className="max-w-3xl mx-auto px-4 py-6">
         <button onClick={() => router.back()} className="flex items-center gap-2 text-sm text-gray-600 hover:text-primary-800 mb-6">
           <ArrowLeft className="w-4 h-4" /> Kembali

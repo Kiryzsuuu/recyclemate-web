@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Plus, Pencil, Trash2, ArrowLeft } from 'lucide-react'
-import Navbar from '@/components/Navbar'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
 import Modal from '@/components/Modal'
@@ -24,7 +23,7 @@ const PRODUCT_TYPES = [
   { value: 'retail', label: 'Retail' },
 ]
 
-const defaultForm = { name: '', price: 0, material: '', description: '', stock: 0, productType: 'handcraft', imageUrl: '', crafterCity: '' }
+const defaultForm = { name: '', price: 0, material: '', description: '', stock: 0, productType: 'handcraft', imageUrl: '', imagePreview: '', crafterCity: '' }
 
 export default function ManageStorePage() {
   const router = useRouter()
@@ -37,11 +36,9 @@ export default function ManageStorePage() {
   const [error, setError] = useState('')
 
   const fetchMyProducts = async () => {
-    // Fetch all products where crafterId = me (use admin products endpoint or filter)
     try {
-      const res = await fetch('/api/products?role=admin')
+      const res = await fetch('/api/products/mine')
       const data = await res.json()
-      // filter by current user — in real app this would be /api/products/mine
       setProducts(data.products || [])
     } finally {
       setLoading(false)
@@ -63,9 +60,20 @@ export default function ManageStorePage() {
     setModal(true)
   }
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onloadend = () => {
+      const base64 = reader.result as string
+      setForm(f => ({ ...f, imageUrl: base64, imagePreview: base64 }))
+    }
+    reader.readAsDataURL(file)
+  }
+
   const openEdit = (p: Product) => {
     setEditId(p._id)
-    setForm({ name: p.name, price: p.price, material: p.material, description: '', stock: p.stock, productType: p.productType, imageUrl: '', crafterCity: '' })
+    setForm({ name: p.name, price: p.price, material: p.material, description: '', stock: p.stock, productType: p.productType, imageUrl: '', imagePreview: '', crafterCity: '' })
     setError('')
     setModal(true)
   }
@@ -102,8 +110,7 @@ export default function ManageStorePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
+    <div>
       <div className="max-w-3xl mx-auto px-4 py-6">
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -181,7 +188,26 @@ export default function ManageStorePage() {
               placeholder="Deskripsi produk..."
             />
           </div>
-          <Input label="URL Gambar (opsional)" value={form.imageUrl} onChange={e => setForm(f => ({ ...f, imageUrl: e.target.value }))} placeholder="https://..." />
+          <div>
+            <label className="text-sm font-medium text-gray-700 block mb-1.5">Gambar Produk (opsional)</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-medium file:bg-primary-50 file:text-primary-800 hover:file:bg-primary-100 cursor-pointer"
+            />
+            {form.imagePreview && (
+              <div className="mt-2 relative">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={form.imagePreview} alt="Preview" className="w-full h-40 object-cover rounded-xl border border-gray-200" />
+                <button
+                  type="button"
+                  onClick={() => setForm(f => ({ ...f, imageUrl: '', imagePreview: '' }))}
+                  className="absolute top-2 right-2 bg-white/80 hover:bg-white text-gray-600 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold"
+                >✕</button>
+              </div>
+            )}
+          </div>
           <div className="flex gap-3 mt-2">
             <Button variant="secondary" onClick={() => setModal(false)} className="flex-1">Batal</Button>
             <Button loading={saving} onClick={saveProduct} className="flex-1">Simpan</Button>

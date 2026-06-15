@@ -2,7 +2,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
-import Navbar from '@/components/Navbar'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
 import RoleCard from '@/components/RoleCard'
@@ -46,8 +45,7 @@ export default function OpenStorePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
+    <div>
       <div className="max-w-lg mx-auto px-4 py-8">
         <button onClick={() => step === 1 ? router.back() : setStep(1)} className="flex items-center gap-2 text-sm text-gray-600 hover:text-primary-800 mb-6">
           <ArrowLeft className="w-4 h-4" /> {step === 1 ? 'Kembali' : 'Pilih Tipe Toko'}

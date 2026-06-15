@@ -1,7 +1,6 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
 import { Search } from 'lucide-react'
-import Navbar from '@/components/Navbar'
 import ProductCard from '@/components/ProductCard'
 import CategoryChip from '@/components/CategoryChip'
 
@@ -57,9 +56,7 @@ export default function HomePage() {
   }, [fetchProducts])
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-
+    <div>
       {/* Hero banner */}
       <div className="bg-gradient-to-r from-primary-800 to-primary-600 text-white py-10 px-4">
         <div className="max-w-7xl mx-auto">

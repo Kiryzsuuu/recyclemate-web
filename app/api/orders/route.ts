@@ -6,12 +6,17 @@ import { getUser } from '@/lib/auth'
 import { sendOrderConfirmation } from '@/lib/email'
 
 export async function GET(req: NextRequest) {
-  const user = getUser(req)
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  try {
+    const user = getUser(req)
+    if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  await connectDB()
-  const orders = await Order.find({ buyerId: user.id }).sort({ createdAt: -1 })
-  return NextResponse.json({ orders })
+    await connectDB()
+    const orders = await Order.find({ buyerId: user.id }).sort({ createdAt: -1 })
+    return NextResponse.json({ orders })
+  } catch (err) {
+    console.error(err)
+    return NextResponse.json({ error: 'Server error' }, { status: 500 })
+  }
 }
 
 export async function POST(req: NextRequest) {
