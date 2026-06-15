@@ -7,10 +7,10 @@ import Input from '@/components/Input'
 import RoleCard from '@/components/RoleCard'
 
 const STORE_TYPES = [
-  { role: 'penumpul', title: 'Toko Penumpul', description: 'Jual limbah & sampah ke pengepul', icon: '🗑️' },
-  { role: 'pengepul', title: 'Toko Pengepul', description: 'Beli & olah limbah jadi bahan baku', icon: '🏭' },
-  { role: 'pengrajin', title: 'Toko Pengrajin', description: 'Buat & jual kerajinan daur ulang', icon: '🎨' },
-  { role: 'distributor', title: 'Toko Distributor', description: 'Distribusikan produk ke konsumen', icon: '🚚' },
+  { role: 'penumpul', title: 'Toko Penumpul', description: 'Jual limbah & sampah ke pengepul' },
+  { role: 'pengepul', title: 'Toko Pengepul', description: 'Beli & olah limbah jadi bahan baku' },
+  { role: 'pengrajin', title: 'Toko Pengrajin', description: 'Buat & jual kerajinan daur ulang' },
+  { role: 'distributor', title: 'Toko Distributor', description: 'Distribusikan produk ke konsumen' },
 ]
 
 export default function OpenStorePage() {
@@ -69,7 +69,6 @@ export default function OpenStorePage() {
                     role={t.role}
                     title={t.title}
                     description={t.description}
-                    icon={t.icon}
                     selected={storeType === t.role}
                     onClick={() => setStoreType(t.role)}
                   />

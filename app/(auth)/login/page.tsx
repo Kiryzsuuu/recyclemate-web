@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Recycle } from 'lucide-react'
+import { Recycle, ArrowLeft } from 'lucide-react'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
 
@@ -39,6 +39,9 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-green-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
+        <Link href="/" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-primary-800 mb-6 transition-colors">
+          <ArrowLeft className="w-4 h-4" /> Kembali ke Beranda
+        </Link>
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
             <div className="w-10 h-10 bg-primary-800 rounded-xl flex items-center justify-center">
@@ -65,14 +68,21 @@ export default function LoginPage() {
               placeholder="kamu@email.com"
               required
             />
-            <Input
-              label="Password"
-              type="password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-            />
+            <div>
+              <Input
+                label="Password"
+                type="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+              />
+              <div className="text-right mt-1.5">
+                <Link href="/forgot-password" className="text-xs text-primary-800 hover:underline">
+                  Lupa Password?
+                </Link>
+              </div>
+            </div>
             <Button type="submit" size="lg" loading={loading} className="mt-2 w-full">
               Masuk
             </Button>

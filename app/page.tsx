@@ -83,20 +83,15 @@ export default function LandingPage() {
           </div>
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { role: 'Penumpul', desc: 'Kumpulkan limbah & jual ke pengepul', color: 'bg-blue-50 text-blue-700 border-blue-200', step: '01' },
-              { role: 'Pengepul', desc: 'Sortir & olah jadi bahan baku untuk pengrajin', color: 'bg-amber-50 text-amber-700 border-amber-200', step: '02' },
-              { role: 'Pengrajin', desc: 'Ciptakan kerajinan unik dari bahan daur ulang', color: 'bg-purple-50 text-purple-700 border-purple-200', step: '03' },
-              { role: 'Pembeli', desc: 'Dapatkan produk berkualitas ramah lingkungan', color: 'bg-green-50 text-green-700 border-green-200', step: '04' },
+              { role: 'Penumpul', desc: 'Kumpulkan limbah & jual ke pengepul', step: '01' },
+              { role: 'Pengepul', desc: 'Sortir & olah jadi bahan baku untuk pengrajin', step: '02' },
+              { role: 'Pengrajin', desc: 'Ciptakan kerajinan unik dari bahan daur ulang', step: '03' },
+              { role: 'Pembeli', desc: 'Dapatkan produk berkualitas ramah lingkungan', step: '04' },
             ].map((item, i) => (
-              <div key={i} className={`relative rounded-2xl border-2 p-6 ${item.color}`}>
-                <div className="text-4xl font-black opacity-20 mb-3">{item.step}</div>
-                <h3 className="font-bold text-lg mb-2">{item.role}</h3>
-                <p className="text-sm opacity-80">{item.desc}</p>
-                {i < 3 && (
-                  <div className="hidden md:block absolute -right-4 top-1/2 -translate-y-1/2 z-10">
-                    <ArrowRight className="w-6 h-6 text-gray-400" />
-                  </div>
-                )}
+              <div key={i} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                <div className="text-4xl font-black text-gray-100 mb-3">{item.step}</div>
+                <h3 className="font-bold text-lg mb-2 text-gray-900">{item.role}</h3>
+                <p className="text-sm text-gray-500">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -122,7 +117,7 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 text-center py-8 text-sm">
-        <p>&copy; 2024 RecycleMate. Dibuat dengan ❤️ untuk lingkungan yang lebih baik.</p>
+        <p>&copy; 2024 RecycleMate. Dibuat untuk lingkungan yang lebih baik.</p>
       </footer>
     </div>
   )

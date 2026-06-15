@@ -2,17 +2,17 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Recycle } from 'lucide-react'
+import { Recycle, ArrowLeft } from 'lucide-react'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
 import RoleCard from '@/components/RoleCard'
 
 const ROLES = [
-  { role: 'pembeli', title: 'Pembeli', description: 'Beli produk kerajinan & daur ulang', icon: '🛒' },
-  { role: 'penumpul', title: 'Penumpul', description: 'Kumpulkan & jual limbah ke pengepul', icon: '🗑️' },
-  { role: 'pengepul', title: 'Pengepul', description: 'Sortir limbah jadi bahan baku', icon: '🏭' },
-  { role: 'pengrajin', title: 'Pengrajin', description: 'Buat kerajinan dari bahan daur ulang', icon: '🎨' },
-  { role: 'distributor', title: 'Distributor', description: 'Distribusikan produk ke pembeli', icon: '🚚' },
+  { role: 'pembeli', title: 'Pembeli', description: 'Beli produk kerajinan & daur ulang' },
+  { role: 'penumpul', title: 'Penumpul', description: 'Kumpulkan & jual limbah ke pengepul' },
+  { role: 'pengepul', title: 'Pengepul', description: 'Sortir limbah jadi bahan baku' },
+  { role: 'pengrajin', title: 'Pengrajin', description: 'Buat kerajinan dari bahan daur ulang' },
+  { role: 'distributor', title: 'Distributor', description: 'Distribusikan produk ke pembeli' },
 ]
 
 export default function RegisterPage() {
@@ -48,6 +48,9 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-green-50 flex items-center justify-center p-4 py-10">
       <div className="w-full max-w-lg">
+        <Link href="/" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-primary-800 mb-6 transition-colors">
+          <ArrowLeft className="w-4 h-4" /> Kembali ke Beranda
+        </Link>
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
             <div className="w-10 h-10 bg-primary-800 rounded-xl flex items-center justify-center">
@@ -117,7 +120,6 @@ export default function RegisterPage() {
                     role={r.role}
                     title={r.title}
                     description={r.description}
-                    icon={r.icon}
                     selected={role === r.role}
                     onClick={() => setRole(r.role)}
                   />

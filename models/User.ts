@@ -10,6 +10,8 @@ export interface IUser extends Document {
   bio: string
   storeId: string
   isDeactivated: boolean
+  resetToken?: string
+  resetTokenExpires?: Date
   createdAt: Date
 }
 
@@ -23,6 +25,8 @@ const UserSchema = new Schema<IUser>({
   bio: { type: String, default: '' },
   storeId: { type: String, default: '' },
   isDeactivated: { type: Boolean, default: false },
+  resetToken: { type: String, default: '' },
+  resetTokenExpires: { type: Date },
   createdAt: { type: Date, default: Date.now },
 })
 
