@@ -1,7 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 import connectDB from '@/lib/mongodb'
 import SiteSettings from '@/models/SiteSettings'
-import { getUser, isAdminUser } from '@/lib/auth'
+import User from '@/models/User'
+import { getUser } from '@/lib/auth'
+
+async function requireAdmin(req: NextRequest) {
+  const payload = getUser(req)
+  if (!payload) return null
+  await connectDB()
+  const user = await User.findById(payload.id).select('role isAdmin')
+  if (!user) return null
+  if (user.role !== 'admin' && !user.isAdmin) return null
+  return user
+}
 
 async function getOrCreateSettings() {
   let settings = await SiteSettings.findOne()
@@ -9,20 +20,24 @@ async function getOrCreateSettings() {
   return settings
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const admin = await requireAdmin(req)
+    if (!admin) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
     await connectDB()
     const settings = await getOrCreateSettings()
     return NextResponse.json({ settings })
-  } catch {
+  } catch (err) {
+    console.error(err)
     return NextResponse.json({ error: 'Gagal mengambil pengaturan' }, { status: 500 })
   }
 }
 
 export async function PUT(req: NextRequest) {
   try {
-    const admin = getUser(req)
-    if (!isAdminUser(admin)) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const admin = await requireAdmin(req)
+    if (!admin) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
     await connectDB()
     const body = await req.json()
@@ -50,7 +65,8 @@ export async function PUT(req: NextRequest) {
     }
 
     return NextResponse.json({ settings })
-  } catch {
+  } catch (err) {
+    console.error('Settings PUT error:', err)
     return NextResponse.json({ error: 'Gagal menyimpan pengaturan' }, { status: 500 })
   }
 }

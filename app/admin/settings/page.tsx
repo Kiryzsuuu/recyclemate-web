@@ -115,12 +115,14 @@ export default function AdminSettingsPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(settings),
       })
-      const data = await res.json()
-      if (!res.ok) { setError(data.error || 'Gagal menyimpan'); return }
+      const text = await res.text()
+      let data: { error?: string } = {}
+      try { data = JSON.parse(text) } catch { setError(`Server error: ${text.slice(0, 100)}`); return }
+      if (!res.ok) { setError(data.error || `Gagal menyimpan (${res.status})`); return }
       setSaved(true)
       setTimeout(() => setSaved(false), 3000)
-    } catch {
-      setError('Terjadi kesalahan jaringan')
+    } catch (err) {
+      setError(`Kesalahan jaringan: ${err instanceof Error ? err.message : 'unknown'}`)
     } finally {
       setSaving(false)
     }
