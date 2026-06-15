@@ -9,6 +9,7 @@ interface UserData {
   name: string
   email: string
   role: string
+  avatarUrl?: string
 }
 
 export default function Navbar() {
@@ -69,8 +70,12 @@ export default function Navbar() {
                 onClick={() => setDropdownOpen(prev => !prev)}
                 className="flex items-center gap-2.5 pl-3 pr-2 py-1.5 rounded-xl hover:bg-gray-100 transition-colors"
               >
-                <div className="w-8 h-8 bg-primary-800 rounded-full flex items-center justify-center text-white text-xs font-bold select-none">
-                  {initials}
+                <div className="w-8 h-8 bg-primary-800 rounded-full overflow-hidden flex items-center justify-center text-white text-xs font-bold select-none">
+                  {user.avatarUrl
+                    // eslint-disable-next-line @next/next/no-img-element
+                    ? <img src={user.avatarUrl} alt={user.name} className="w-full h-full object-cover" />
+                    : initials
+                  }
                 </div>
                 <div className="text-left hidden lg:block">
                   <p className="text-sm font-semibold text-gray-900 leading-none">{user.name.split(' ')[0]}</p>
@@ -175,8 +180,12 @@ export default function Navbar() {
         <div className="md:hidden bg-white border-t border-gray-100 px-4 py-4 flex flex-col gap-1">
           {user && (
             <div className="flex items-center gap-3 px-2 py-3 mb-2 border-b border-gray-100">
-              <div className="w-10 h-10 bg-primary-800 rounded-full flex items-center justify-center text-white text-sm font-bold">
-                {initials}
+              <div className="w-10 h-10 bg-primary-800 rounded-full overflow-hidden flex items-center justify-center text-white text-sm font-bold">
+                {user.avatarUrl
+                  // eslint-disable-next-line @next/next/no-img-element
+                  ? <img src={user.avatarUrl} alt={user.name} className="w-full h-full object-cover" />
+                  : initials
+                }
               </div>
               <div>
                 <p className="text-sm font-semibold text-gray-900">{user.name}</p>

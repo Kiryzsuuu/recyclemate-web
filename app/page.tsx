@@ -118,7 +118,7 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 text-center py-8 text-sm">
-        <p>&copy; 2024 RecycleMate. Dibuat untuk lingkungan yang lebih baik.</p>
+        <p>&copy; {new Date().getFullYear()} RecycleMate. Dibuat untuk lingkungan yang lebih baik.</p>
       </footer>
     </div>
   )

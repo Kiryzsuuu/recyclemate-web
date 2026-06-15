@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Users, ShoppingBag, Package, Heart, Recycle } from 'lucide-react'
+import { Users, ShoppingBag, Package, Heart, Recycle, Settings } from 'lucide-react'
 import Link from 'next/link'
 import StatCard from '@/components/StatCard'
 
@@ -77,6 +77,9 @@ export default function AdminPage() {
               <span className="ml-2 text-xs bg-orange-500 px-2 py-0.5 rounded-full">Admin</span>
             </div>
           </div>
+          <Link href="/admin/settings" className="flex items-center gap-1.5 text-sm text-green-100 hover:text-white">
+            <Settings className="w-4 h-4" /> Pengaturan
+          </Link>
           <Link href="/home" className="text-sm text-green-100 hover:text-white">Marketplace</Link>
         </div>
       </nav>

@@ -8,6 +8,7 @@ export interface IUser extends Document {
   city: string
   phone: string
   bio: string
+  avatarUrl: string
   storeId: string
   isDeactivated: boolean
   resetToken?: string
@@ -23,6 +24,7 @@ const UserSchema = new Schema<IUser>({
   city: { type: String, default: '' },
   phone: { type: String, default: '' },
   bio: { type: String, default: '' },
+  avatarUrl: { type: String, default: '' },
   storeId: { type: String, default: '' },
   isDeactivated: { type: Boolean, default: false },
   resetToken: { type: String, default: '' },
