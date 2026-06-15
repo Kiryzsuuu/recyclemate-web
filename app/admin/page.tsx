@@ -77,7 +77,7 @@ export default function AdminPage() {
               <span className="ml-2 text-xs bg-orange-500 px-2 py-0.5 rounded-full">Admin</span>
             </div>
           </div>
-          <Link href="/home" className="text-sm text-green-100 hover:text-white">← Marketplace</Link>
+          <Link href="/home" className="text-sm text-green-100 hover:text-white">Marketplace</Link>
         </div>
       </nav>
 
@@ -105,7 +105,7 @@ export default function AdminPage() {
             <StatCard title="Total Pengguna" value={stats?.users ?? '—'} icon={<Users className="w-6 h-6" />} color="bg-blue-50 text-blue-700" />
             <StatCard title="Produk Aktif" value={stats?.products ?? '—'} icon={<Package className="w-6 h-6" />} color="bg-primary-50 text-primary-800" />
             <StatCard title="Total Pesanan" value={stats?.orders ?? '—'} icon={<ShoppingBag className="w-6 h-6" />} color="bg-purple-50 text-purple-700" />
-            <StatCard title="Donasi Limbah" value={stats?.donations ?? '—'} icon={<Heart className="w-6 h-6" />} color="bg-amber-50 text-amber-700" />
+            <StatCard title="Setoran Limbah" value={stats?.donations ?? '—'} icon={<Heart className="w-6 h-6" />} color="bg-amber-50 text-amber-700" />
           </div>
         )}
 

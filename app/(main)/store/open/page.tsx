@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ChevronLeft } from 'lucide-react'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
 import RoleCard from '@/components/RoleCard'
@@ -48,7 +47,7 @@ export default function OpenStorePage() {
     <div>
       <div className="max-w-lg mx-auto px-4 py-8">
         <button onClick={() => step === 1 ? router.back() : setStep(1)} className="flex items-center gap-2 text-sm text-gray-600 hover:text-primary-800 mb-6">
-          <ChevronLeft className="w-4 h-4" /> {step === 1 ? 'Kembali' : 'Pilih Tipe Toko'}
+          {step === 1 ? 'Kembali' : 'Pilih Tipe Toko'}
         </button>
 
         <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">

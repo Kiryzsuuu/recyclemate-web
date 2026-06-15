@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { ChevronLeft, Store } from 'lucide-react'
+import { Store } from 'lucide-react'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
 
@@ -83,7 +83,7 @@ export default function EditStorePage() {
   return (
     <div className="max-w-lg mx-auto px-4 py-6">
       <button onClick={() => router.back()} className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-primary-800 mb-6 transition-colors">
-        <ChevronLeft className="w-4 h-4" /> Kembali
+        Kembali
       </button>
 
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Edit Toko</h1>

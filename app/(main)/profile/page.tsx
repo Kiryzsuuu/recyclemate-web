@@ -45,7 +45,7 @@ const STATUS_COLORS: Record<string, string> = {
 const TABS = [
   { id: 'profil', label: 'Profil', icon: User },
   { id: 'pesanan', label: 'Pesanan', icon: ShoppingBag },
-  { id: 'donasi', label: 'Donasi', icon: Heart },
+  { id: 'donasi', label: 'Setoran', icon: Heart },
 ]
 
 export default function ProfilePage() {
@@ -151,13 +151,13 @@ export default function ProfilePage() {
               </Button>
             )}
             {user.role === 'pembeli' && (
-              <Button size="sm" onClick={() => router.push('/store/open')} className="bg-white text-primary-800 hover:bg-green-50">
+              <Button size="sm" onClick={() => router.push('/store/open')} className="bg-white/20 text-white hover:bg-white/30">
                 <Store className="w-3.5 h-3.5 mr-1" /> Buka Toko
               </Button>
             )}
             {isSellerRole && (
               <>
-                <Button size="sm" onClick={() => router.push('/store/manage')} className="bg-white text-primary-800 hover:bg-green-50">
+                <Button size="sm" onClick={() => router.push('/store/manage')} className="bg-white/20 text-white hover:bg-white/30">
                   <Store className="w-3.5 h-3.5 mr-1" /> Kelola Produk
                 </Button>
                 <Button size="sm" onClick={() => router.push('/store/edit')} className="bg-white/20 text-white hover:bg-white/30">
@@ -166,7 +166,7 @@ export default function ProfilePage() {
               </>
             )}
             <Button size="sm" onClick={() => setDonateModal(true)} className="bg-white/20 text-white hover:bg-white/30">
-              <Heart className="w-3.5 h-3.5 mr-1" /> Donasi Limbah
+              <Heart className="w-3.5 h-3.5 mr-1" /> Setor Limbah
             </Button>
           </div>
         </div>
@@ -236,12 +236,12 @@ export default function ProfilePage() {
         {tab === 'donasi' && (
           <div className="flex flex-col gap-3">
             <Button onClick={() => setDonateModal(true)} className="self-start">
-              + Donasi Limbah Baru
+              + Setor Limbah Baru
             </Button>
             {donations.length === 0 ? (
               <div className="text-center py-12 text-gray-400">
                 <Heart className="w-12 h-12 mx-auto mb-3 opacity-30" />
-                <p>Belum ada donasi</p>
+                <p>Belum ada setoran limbah</p>
               </div>
             ) : donations.map(don => (
               <div key={don._id} className="bg-white rounded-2xl border border-gray-100 p-4">
@@ -263,7 +263,7 @@ export default function ProfilePage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/50" onClick={() => setDonateModal(false)} />
           <div className="relative bg-white rounded-2xl p-6 w-full max-w-md">
-            <h3 className="font-bold text-lg mb-4">Donasi Limbah</h3>
+            <h3 className="font-bold text-lg mb-4">Setor Limbah</h3>
             <div className="flex flex-col gap-3">
               <Input label="Nama Item" value={donateForm.itemName} onChange={e => setDonateForm(f => ({ ...f, itemName: e.target.value }))} placeholder="Contoh: Botol plastik bekas" />
               <Input label="Material" value={donateForm.material} onChange={e => setDonateForm(f => ({ ...f, material: e.target.value }))} placeholder="Plastik, Kayu, dll" />
@@ -293,7 +293,7 @@ export default function ProfilePage() {
               </div>
               <div className="flex gap-3 mt-2">
                 <Button variant="secondary" onClick={() => setDonateModal(false)} className="flex-1">Batal</Button>
-                <Button loading={donating} onClick={submitDonation} className="flex-1">Kirim Donasi</Button>
+                <Button loading={donating} onClick={submitDonation} className="flex-1">Kirim Setoran</Button>
               </div>
             </div>
           </div>
