@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Recycle, Leaf, ShoppingBag, Users, Award, ArrowRight } from 'lucide-react'
+import { Recycle, Leaf, ShoppingBag, Users, Award, ArrowRight, Trash2, Factory, Palette, BaggageClaim } from 'lucide-react'
 
 export default function LandingPage() {
   return (
@@ -83,13 +83,15 @@ export default function LandingPage() {
           </div>
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { role: 'Penumpul', desc: 'Kumpulkan limbah & jual ke pengepul', step: '01' },
-              { role: 'Pengepul', desc: 'Sortir & olah jadi bahan baku untuk pengrajin', step: '02' },
-              { role: 'Pengrajin', desc: 'Ciptakan kerajinan unik dari bahan daur ulang', step: '03' },
-              { role: 'Pembeli', desc: 'Dapatkan produk berkualitas ramah lingkungan', step: '04' },
+              { role: 'Penumpul', desc: 'Kumpulkan limbah & jual ke pengepul', icon: Trash2 },
+              { role: 'Pengepul', desc: 'Sortir & olah jadi bahan baku untuk pengrajin', icon: Factory },
+              { role: 'Pengrajin', desc: 'Ciptakan kerajinan unik dari bahan daur ulang', icon: Palette },
+              { role: 'Pembeli', desc: 'Dapatkan produk berkualitas ramah lingkungan', icon: BaggageClaim },
             ].map((item, i) => (
               <div key={i} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-                <div className="text-4xl font-black text-gray-100 mb-3">{item.step}</div>
+                <div className="w-11 h-11 bg-primary-50 rounded-xl flex items-center justify-center mb-4">
+                  <item.icon className="w-5 h-5 text-primary-800" />
+                </div>
                 <h3 className="font-bold text-lg mb-2 text-gray-900">{item.role}</h3>
                 <p className="text-sm text-gray-500">{item.desc}</p>
               </div>

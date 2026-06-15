@@ -2,7 +2,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { Recycle, ArrowLeft } from 'lucide-react'
+import { Recycle } from 'lucide-react'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
 
@@ -50,10 +50,6 @@ function ResetPasswordForm() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-green-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <Link href="/login" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-primary-800 mb-6 transition-colors">
-          <ArrowLeft className="w-4 h-4" /> Kembali ke Login
-        </Link>
-
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
             <div className="w-10 h-10 bg-primary-800 rounded-xl flex items-center justify-center">
@@ -108,6 +104,11 @@ function ResetPasswordForm() {
             </>
           )}
         </div>
+        <p className="text-center mt-6">
+          <Link href="/login" className="text-sm text-gray-400 hover:text-gray-600 transition-colors">
+            Kembali ke Login
+          </Link>
+        </p>
       </div>
     </div>
   )

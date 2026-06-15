@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
-import { Recycle, ArrowLeft } from 'lucide-react'
+import { Recycle } from 'lucide-react'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
 
@@ -37,10 +37,6 @@ export default function ForgotPasswordPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-green-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <Link href="/login" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-primary-800 mb-6 transition-colors">
-          <ArrowLeft className="w-4 h-4" /> Kembali ke Login
-        </Link>
-
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
             <div className="w-10 h-10 bg-primary-800 rounded-xl flex items-center justify-center">
@@ -96,6 +92,11 @@ export default function ForgotPasswordPage() {
           Ingat password kamu?{' '}
           <Link href="/login" className="text-primary-800 font-semibold hover:underline">
             Masuk di sini
+          </Link>
+        </p>
+        <p className="text-center mt-3">
+          <Link href="/" className="text-sm text-gray-400 hover:text-gray-600 transition-colors">
+            Kembali ke Beranda
           </Link>
         </p>
       </div>
