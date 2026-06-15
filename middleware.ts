@@ -13,7 +13,8 @@ export async function middleware(req: NextRequest) {
     const secret = new TextEncoder().encode(process.env.JWT_SECRET)
     const { payload } = await jwtVerify(token, secret)
 
-    if (pathname.startsWith('/admin') && payload.role !== 'admin') {
+    const isAdmin = payload.role === 'admin' || payload.isAdmin === true
+    if (pathname.startsWith('/admin') && !isAdmin) {
       return NextResponse.redirect(new URL('/home', req.url))
     }
 

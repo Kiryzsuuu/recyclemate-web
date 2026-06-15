@@ -4,11 +4,11 @@ import User from '@/models/User'
 import Product from '@/models/Product'
 import Order from '@/models/Order'
 import Donation from '@/models/Donation'
-import { getUser } from '@/lib/auth'
+import { getUser, isAdminUser } from '@/lib/auth'
 
 export async function GET(req: NextRequest) {
   const user = getUser(req)
-  if (!user || user.role !== 'admin') return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  if (!user || !isAdminUser(user)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 
   await connectDB()
   const [users, products, orders, donations] = await Promise.all([

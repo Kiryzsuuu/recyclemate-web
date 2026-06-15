@@ -1,21 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { cookies } from 'next/headers'
-import { jwtVerify } from 'jose'
 import connectDB from '@/lib/mongodb'
 import SiteSettings from '@/models/SiteSettings'
-
-async function requireAdmin() {
-  const token = (await cookies()).get('token')?.value
-  if (!token) return null
-  try {
-    const secret = new TextEncoder().encode(process.env.JWT_SECRET)
-    const { payload } = await jwtVerify(token, secret)
-    if (payload.role !== 'admin') return null
-    return payload
-  } catch {
-    return null
-  }
-}
+import { getUser, isAdminUser } from '@/lib/auth'
 
 async function getOrCreateSettings() {
   let settings = await SiteSettings.findOne()
@@ -35,8 +21,8 @@ export async function GET() {
 
 export async function PUT(req: NextRequest) {
   try {
-    const admin = await requireAdmin()
-    if (!admin) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const admin = getUser(req)
+    if (!isAdminUser(admin)) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
     await connectDB()
     const body = await req.json()

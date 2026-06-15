@@ -8,6 +8,7 @@ export interface UserPayload {
   name: string
   email: string
   role: string
+  isAdmin?: boolean
 }
 
 export function signToken(payload: UserPayload): string {
@@ -26,4 +27,8 @@ export function getUser(request: NextRequest): UserPayload | null {
   const token = request.cookies.get('token')?.value
   if (!token) return null
   return verifyToken(token)
+}
+
+export function isAdminUser(payload: UserPayload | null): boolean {
+  return !!payload && (payload.role === 'admin' || payload.isAdmin === true)
 }

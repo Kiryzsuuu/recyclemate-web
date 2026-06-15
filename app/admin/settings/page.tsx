@@ -93,7 +93,7 @@ export default function AdminSettingsPage() {
 
   useEffect(() => {
     fetch('/api/auth/me').then(r => r.json()).then(d => {
-      if (!d.user || d.user.role !== 'admin') { router.push('/home'); return }
+      if (!d.user || (d.user.role !== 'admin' && !d.user.isAdmin)) { router.push('/home'); return }
     })
     fetch('/api/admin/settings').then(r => r.json()).then(d => {
       if (d.settings) setSettings(s => ({ ...s, ...d.settings }))
