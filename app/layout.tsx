@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import './globals.css'
+import PageLoader from '@/components/PageLoader'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="id" className={poppins.variable}>
       <body className="min-h-screen bg-gray-50 text-gray-900 antialiased">
+        <PageLoader />
         {children}
       </body>
     </html>
