@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { Star, MapPin, Package, Minus, Plus } from 'lucide-react'
 import Button from '@/components/Button'
-import Modal from '@/components/Modal'
-import Input from '@/components/Input'
 
 interface Product {
   _id: string
@@ -35,12 +33,6 @@ export default function ProductDetailPage() {
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
   const [qty, setQty] = useState(1)
-  const [orderModal, setOrderModal] = useState(false)
-  const [address, setAddress] = useState('')
-  const [notes, setNotes] = useState('')
-  const [ordering, setOrdering] = useState(false)
-  const [orderError, setOrderError] = useState('')
-  const [orderSuccess, setOrderSuccess] = useState(false)
 
   useEffect(() => {
     fetch(`/api/products/${id}`)
@@ -49,31 +41,8 @@ export default function ProductDetailPage() {
       .finally(() => setLoading(false))
   }, [id])
 
-  const placeOrder = async () => {
-    setOrdering(true)
-    setOrderError('')
-    try {
-      const res = await fetch('/api/orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ productId: product?._id, quantity: qty, shippingAddress: address, notes }),
-      })
-      const data = await res.json()
-      if (!res.ok) {
-        if (res.status === 401) {
-          router.push('/login')
-          return
-        }
-        setOrderError(data.error || 'Gagal membuat pesanan')
-      } else {
-        setOrderSuccess(true)
-        setProduct(p => p ? { ...p, stock: p.stock - qty } : p)
-      }
-    } catch {
-      setOrderError('Terjadi kesalahan')
-    } finally {
-      setOrdering(false)
-    }
+  const goToCheckout = () => {
+    router.push(`/checkout/${product?._id}?qty=${qty}`)
   }
 
   if (loading) {
@@ -161,7 +130,7 @@ export default function ProductDetailPage() {
                     <Plus className="w-4 h-4" />
                   </button>
                 </div>
-                <Button size="lg" onClick={() => setOrderModal(true)} className="flex-1">
+                <Button size="lg" onClick={goToCheckout} className="flex-1">
                   Beli — Rp {(product.price * qty).toLocaleString('id-ID')}
                 </Button>
               </div>
@@ -171,45 +140,6 @@ export default function ProductDetailPage() {
           </div>
         </div>
       </div>
-
-      {/* Order modal */}
-      <Modal open={orderModal} onClose={() => { setOrderModal(false); setOrderSuccess(false); setOrderError('') }} title={orderSuccess ? 'Pesanan Berhasil!' : 'Konfirmasi Pesanan'}>
-        {orderSuccess ? (
-          <div className="text-center py-4">
-            <div className="text-5xl mb-4">🎉</div>
-            <h3 className="font-bold text-lg text-gray-900 mb-2">Pesanan Dibuat!</h3>
-            <p className="text-gray-500 text-sm mb-6">Pesanan kamu berhasil dibuat. Lihat status di halaman profil.</p>
-            <Button onClick={() => { setOrderModal(false); router.push('/profile') }} className="w-full">
-              Lihat Pesanan
-            </Button>
-          </div>
-        ) : (
-          <div className="flex flex-col gap-4">
-            <div className="bg-gray-50 rounded-xl p-4 text-sm">
-              <p className="font-medium text-gray-900">{product.name}</p>
-              <p className="text-gray-500 mt-1">Jumlah: {qty} × Rp {product.price.toLocaleString('id-ID')}</p>
-              <p className="font-bold text-primary-800 mt-1">Total: Rp {(product.price * qty).toLocaleString('id-ID')}</p>
-            </div>
-            <Input
-              label="Alamat Pengiriman"
-              value={address}
-              onChange={e => setAddress(e.target.value)}
-              placeholder="Masukkan alamat lengkap"
-            />
-            <Input
-              label="Catatan (opsional)"
-              value={notes}
-              onChange={e => setNotes(e.target.value)}
-              placeholder="Catatan untuk penjual"
-            />
-            {orderError && <p className="text-sm text-red-500">{orderError}</p>}
-            <div className="flex gap-3 mt-2">
-              <Button variant="secondary" onClick={() => setOrderModal(false)} className="flex-1">Batal</Button>
-              <Button loading={ordering} onClick={placeOrder} className="flex-1">Pesan Sekarang</Button>
-            </div>
-          </div>
-        )}
-      </Modal>
     </div>
   )
 }

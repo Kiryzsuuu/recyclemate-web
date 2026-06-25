@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-import { Plus, Pencil, Trash2, X, Upload, ImageIcon, Package, Tag, Layers, MapPin, FileText, DollarSign, Hash, CheckCircle2, AlertCircle } from 'lucide-react'
+import { Plus, Pencil, Trash2, X, Upload, ImageIcon, Package, Tag, Layers, MapPin, FileText, DollarSign, Hash, CheckCircle2, AlertCircle, Inbox } from 'lucide-react'
 
 interface Product {
   _id: string
@@ -154,13 +154,22 @@ export default function ManageStorePage() {
             <h1 className="text-2xl font-bold text-gray-900">Kelola Produk</h1>
             <p className="text-sm text-gray-500 mt-0.5">{products.length} produk terdaftar</p>
           </div>
-          <button
-            onClick={openAdd}
-            className="flex items-center gap-2 bg-primary-800 text-white px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-primary-700 transition-all hover:shadow-lg hover:shadow-primary-800/20 active:scale-95"
-          >
-            <Plus className="w-4 h-4" />
-            Tambah Produk
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => router.push('/store/orders')}
+              className="flex items-center gap-2 bg-white border border-gray-200 text-gray-700 px-4 py-2.5 rounded-xl font-semibold text-sm hover:bg-gray-50 transition-colors"
+            >
+              <Inbox className="w-4 h-4" />
+              Pesanan Masuk
+            </button>
+            <button
+              onClick={openAdd}
+              className="flex items-center gap-2 bg-primary-800 text-white px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-primary-700 transition-all hover:shadow-lg hover:shadow-primary-800/20 active:scale-95"
+            >
+              <Plus className="w-4 h-4" />
+              Tambah Produk
+            </button>
+          </div>
         </div>
 
         {/* Product grid */}

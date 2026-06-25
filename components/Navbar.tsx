@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Menu, X, User, LogOut, ShoppingBag, Settings, Store, LayoutDashboard } from 'lucide-react'
+import { Menu, X, User, LogOut, ShoppingBag, Settings, Store, LayoutDashboard, Inbox } from 'lucide-react'
 
 interface UserData {
   id: string
@@ -115,6 +115,14 @@ export default function Navbar() {
                         >
                           <Store className="w-4 h-4 text-gray-400" />
                           Kelola Produk
+                        </Link>
+                        <Link
+                          href="/store/orders"
+                          onClick={() => setDropdownOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                        >
+                          <Inbox className="w-4 h-4 text-gray-400" />
+                          Pesanan Masuk
                         </Link>
                         <Link
                           href="/store/edit"

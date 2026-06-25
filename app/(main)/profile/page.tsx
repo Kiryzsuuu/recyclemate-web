@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { User, ShoppingBag, Heart, Store, Settings, Camera } from 'lucide-react'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
+import { ORDER_STATUS_META } from '@/lib/payment'
 
 interface UserData {
   _id: string
@@ -315,16 +316,20 @@ export default function ProfilePage() {
                 <p>Belum ada pesanan</p>
               </div>
             ) : orders.map(order => (
-              <div key={order._id} className="bg-white rounded-2xl border border-gray-100 p-4">
+              <button
+                key={order._id}
+                onClick={() => router.push(`/orders/${order._id}`)}
+                className="bg-white rounded-2xl border border-gray-100 p-4 text-left hover:border-primary-800/30 hover:shadow-sm transition-all"
+              >
                 <div className="flex justify-between items-start mb-2">
                   <p className="font-semibold text-sm text-gray-900">{order.productName}</p>
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_COLORS[order.status] || 'bg-gray-100 text-gray-600'}`}>
-                    {order.status}
+                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${ORDER_STATUS_META[order.status]?.color || 'bg-gray-100 text-gray-600'}`}>
+                    {ORDER_STATUS_META[order.status]?.label || order.status}
                   </span>
                 </div>
                 <p className="text-xs text-gray-500">Qty: {order.quantity} • Total: Rp {order.totalPrice.toLocaleString('id-ID')}</p>
                 <p className="text-xs text-gray-400 mt-1">{new Date(order.createdAt).toLocaleDateString('id-ID')}</p>
-              </div>
+              </button>
             ))}
           </div>
         )}
