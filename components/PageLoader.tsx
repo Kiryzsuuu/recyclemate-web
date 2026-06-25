@@ -8,11 +8,20 @@ export default function PageLoader() {
   const [prev, setPrev] = useState(pathname)
 
   useEffect(() => {
-    if (pathname !== prev) {
-      setLoading(true)
-      setPrev(pathname)
-      const t = setTimeout(() => setLoading(false), 600)
-      return () => clearTimeout(t)
+    if (pathname === prev) return
+    setPrev(pathname)
+
+    // Only show loader if navigation takes longer than 400ms
+    const showTimer = setTimeout(() => setLoading(true), 400)
+    const hideTimer = setTimeout(() => {
+      clearTimeout(showTimer)
+      setLoading(false)
+    }, 1200)
+
+    return () => {
+      clearTimeout(showTimer)
+      clearTimeout(hideTimer)
+      setLoading(false)
     }
   }, [pathname, prev])
 
