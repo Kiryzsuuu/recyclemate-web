@@ -52,9 +52,10 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Logo */}
-        <Link href="/home" className="flex items-center">
+        <Link href="/home" className="flex items-center gap-2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="RecycleMate" className="h-10 w-auto" />
+          <img src="/logo.png" alt="RecycleMate" className="h-9 w-9 rounded-xl object-cover" />
+          <span className="font-bold text-xl text-primary-800">RecycleMate</span>
         </Link>
 
         {/* Desktop nav */}

@@ -27,7 +27,7 @@ export default function PageLoader() {
           <span className="absolute w-20 h-20 rounded-full bg-primary-800/10 animate-[ping_1.4s_ease-in-out_infinite]" />
           <span className="absolute w-16 h-16 rounded-full bg-primary-800/15 animate-[ping_1.4s_ease-in-out_0.2s_infinite]" />
           {/* Logo */}
-          <div className="relative w-16 h-16 rounded-2xl overflow-hidden shadow-lg animate-[breathe_2s_ease-in-out_infinite]">
+          <div className="relative w-16 h-16 rounded-[18px] overflow-hidden shadow-lg animate-[breathe_2s_ease-in-out_infinite]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo.png" alt="RecycleMate" className="w-full h-full object-cover" />
           </div>

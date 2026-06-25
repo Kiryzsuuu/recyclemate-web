@@ -8,7 +8,10 @@ export default function LandingPage() {
       {/* Navbar */}
       <nav className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-          <Image src="/logo.png" alt="RecycleMate" width={120} height={40} className="h-10 w-auto" />
+          <div className="flex items-center gap-2">
+            <Image src="/logo.png" alt="RecycleMate" width={36} height={36} className="h-9 w-9 rounded-xl object-cover" />
+            <span className="font-bold text-xl text-primary-800">RecycleMate</span>
+          </div>
           <div className="flex items-center gap-3">
             <Link href="/login" className="px-4 py-2 text-sm font-medium text-primary-800 hover:bg-primary-50 rounded-lg transition-colors">
               Masuk
