@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Recycle, Menu, X, User, LogOut, ShoppingBag, Settings, Store, LayoutDashboard } from 'lucide-react'
+import { Menu, X, User, LogOut, ShoppingBag, Settings, Store, LayoutDashboard } from 'lucide-react'
 
 interface UserData {
   id: string
@@ -52,11 +52,9 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Logo */}
-        <Link href="/home" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-primary-800 rounded-lg flex items-center justify-center">
-            <Recycle className="w-5 h-5 text-white" />
-          </div>
-          <span className="font-bold text-xl text-primary-800">RecycleMate</span>
+        <Link href="/home" className="flex items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="RecycleMate" className="h-10 w-auto" />
         </Link>
 
         {/* Desktop nav */}

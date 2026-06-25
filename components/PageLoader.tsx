@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { Recycle } from 'lucide-react'
 
 export default function PageLoader() {
   const pathname = usePathname()
@@ -28,8 +27,9 @@ export default function PageLoader() {
           <span className="absolute w-20 h-20 rounded-full bg-primary-800/10 animate-[ping_1.4s_ease-in-out_infinite]" />
           <span className="absolute w-16 h-16 rounded-full bg-primary-800/15 animate-[ping_1.4s_ease-in-out_0.2s_infinite]" />
           {/* Logo */}
-          <div className="relative w-14 h-14 bg-primary-800 rounded-2xl flex items-center justify-center shadow-lg animate-[breathe_2s_ease-in-out_infinite]">
-            <Recycle className="w-7 h-7 text-white" />
+          <div className="relative w-16 h-16 rounded-2xl overflow-hidden shadow-lg animate-[breathe_2s_ease-in-out_infinite]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="RecycleMate" className="w-full h-full object-cover" />
           </div>
         </div>
         <div className="flex gap-1.5">

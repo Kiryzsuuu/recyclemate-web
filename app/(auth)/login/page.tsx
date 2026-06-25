@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Recycle } from 'lucide-react'
+import Image from 'next/image'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
 
@@ -40,11 +40,8 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-green-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-10 h-10 bg-primary-800 rounded-xl flex items-center justify-center">
-              <Recycle className="w-6 h-6 text-white" />
-            </div>
-            <span className="font-bold text-2xl text-primary-800">RecycleMate</span>
+          <Link href="/" className="inline-block mb-6">
+            <Image src="/logo.png" alt="RecycleMate" width={120} height={120} className="h-16 w-auto mx-auto" />
           </Link>
           <h1 className="text-2xl font-bold text-gray-900">Masuk ke Akunmu</h1>
           <p className="text-gray-500 text-sm mt-1">Selamat datang kembali!</p>

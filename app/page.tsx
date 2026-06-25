@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { Recycle, Leaf, ShoppingBag, Users, Award, Trash2, Factory, Palette, BaggageClaim } from 'lucide-react'
+import { Leaf, ShoppingBag, Users, Award, Trash2, Factory, Palette, BaggageClaim, Recycle } from 'lucide-react'
+import Image from 'next/image'
 
 export default function LandingPage() {
   return (
@@ -7,12 +8,7 @@ export default function LandingPage() {
       {/* Navbar */}
       <nav className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary-800 rounded-lg flex items-center justify-center">
-              <Recycle className="w-5 h-5 text-white" />
-            </div>
-            <span className="font-bold text-xl text-primary-800">RecycleMate</span>
-          </div>
+          <Image src="/logo.png" alt="RecycleMate" width={120} height={40} className="h-10 w-auto" />
           <div className="flex items-center gap-3">
             <Link href="/login" className="px-4 py-2 text-sm font-medium text-primary-800 hover:bg-primary-50 rounded-lg transition-colors">
               Masuk
@@ -102,7 +98,7 @@ export default function LandingPage() {
       {/* CTA */}
       <section className="py-20 bg-primary-800 text-white text-center">
         <div className="max-w-2xl mx-auto px-4">
-          <Recycle className="w-16 h-16 mx-auto mb-6 text-green-300" />
+          <Image src="/logo.png" alt="RecycleMate" width={80} height={80} className="w-20 h-20 mx-auto mb-6 opacity-90" />
           <h2 className="text-3xl font-bold mb-4">Bergabung dengan RecycleMate Sekarang</h2>
           <p className="text-green-100 mb-8">Jadilah bagian dari gerakan daur ulang Indonesia. Gratis untuk semua pengguna.</p>
           <div className="flex flex-wrap gap-4 justify-center">

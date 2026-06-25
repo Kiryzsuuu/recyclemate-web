@@ -1,8 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Users, ShoppingBag, Package, Heart, Recycle, Settings, Plus, Trash2, X } from 'lucide-react'
+import { Users, ShoppingBag, Package, Heart, Settings, Plus, Trash2, X } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import StatCard from '@/components/StatCard'
 
 interface Stats { users: number; products: number; orders: number; donations: number }
@@ -110,13 +111,8 @@ export default function AdminPage() {
       <nav className="sticky top-0 z-50 bg-primary-800 text-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
-              <Recycle className="w-5 h-5" />
-            </div>
-            <div>
-              <span className="font-bold">RecycleMate</span>
-              <span className="ml-2 text-xs bg-orange-500 px-2 py-0.5 rounded-full">Admin</span>
-            </div>
+            <Image src="/logo.png" alt="RecycleMate" width={80} height={80} className="h-9 w-auto brightness-0 invert" />
+            <span className="text-xs bg-orange-500 px-2 py-0.5 rounded-full">Admin</span>
           </div>
           <div className="flex items-center gap-4">
             <Link href="/admin/settings" className="flex items-center gap-1.5 text-sm text-green-100 hover:text-white">

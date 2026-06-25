@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 52" fill="none">
+  <!-- Green rounded square background -->
+  <rect width="52" height="52" rx="13" fill="#2E7D32"/>
+
+  <!-- Recycle icon (Lucide recycle scaled to fit 52x52, centered at 26,26) -->
+  <!-- Arrow 1: top-left going up-right -->
+  <path d="M18 14 L22 10 L26 14" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M22 10 L22 22 Q22 26 26 26" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Arrow 2: right going down -->
+  <path d="M34 30 L30 34 L34 38" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M30 34 L30 22 Q30 18 26 18" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Arrow 3: bottom-left going left -->
+  <path d="M16 34 L20 38 L24 34" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M20 38 Q14 38 14 32 Q14 26 18 26" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Text: RecycleMate -->
+  <text x="64" y="22" font-family="Poppins, Inter, -apple-system, sans-serif" font-size="17" font-weight="700" fill="#2E7D32" letter-spacing="-0.3">RecycleMate</text>
+  <!-- Tagline -->
+  <text x="65" y="38" font-family="Poppins, Inter, -apple-system, sans-serif" font-size="10.5" font-weight="400" fill="#6B7280">Marketplace Daur Ulang</text>
+</svg>
